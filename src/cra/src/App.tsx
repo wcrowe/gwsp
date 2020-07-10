@@ -1,21 +1,25 @@
 import React from "react";
-import "./App.css";
 import { BrowserRouter } from "react-router-dom";
-import BaseLayout from "./components/BaseLayout";
-import { ThemeProvider, CssBaseline } from "@material-ui/core";
-import { lightTheme } from "./components/themes/light";
-import Container from "@material-ui/core/Container";
+import Header from "./components/Header";
+import Content from "./components/Content";
+import { CssBaseline, Grid } from "@material-ui/core";
 
 const App = () => (
-  <ThemeProvider theme={lightTheme}>
-    {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
-    <Container>
-      <CssBaseline />
+  <>
+    <CssBaseline />
+    <Grid container direction="column">
       <BrowserRouter>
-        <BaseLayout />
+        <Grid item>
+          <Header />
+        </Grid>
+        <Grid item container justify="center">
+          <Grid item xs={12} sm={8}>
+            <Content />
+          </Grid>
+        </Grid>
       </BrowserRouter>
-    </Container>
-  </ThemeProvider>
+    </Grid>
+  </>
 );
 
 export default App;

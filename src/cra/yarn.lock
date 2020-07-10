@@ -1454,6 +1454,13 @@
     react-is "^16.8.0"
     react-transition-group "^4.4.0"
 
+"@material-ui/icons@^4.9.1":
+  version "4.9.1"
+  resolved "https://registry.yarnpkg.com/@material-ui/icons/-/icons-4.9.1.tgz#fdeadf8cb3d89208945b33dbc50c7c616d0bd665"
+  integrity sha512-GBitL3oBWO0hzBhvA9KxqcowRUsA0qzwKkURyC8nppnC3fw54KPKZ+d4V1Eeg/UnDRSzDaI9nGCdel/eh9AQMg==
+  dependencies:
+    "@babel/runtime" "^7.4.4"
+
 "@material-ui/styles@^4.10.0", "@material-ui/styles@^4.9.14":
   version "4.10.0"
   resolved "https://registry.yarnpkg.com/@material-ui/styles/-/styles-4.10.0.tgz#2406dc23aa358217aa8cc772e6237bd7f0544071"
@@ -4963,6 +4970,11 @@ follow-redirects@^1.0.0:
   version "1.12.1"
   resolved "https://registry.yarnpkg.com/follow-redirects/-/follow-redirects-1.12.1.tgz#de54a6205311b93d60398ebc01cf7015682312b6"
   integrity sha512-tmRv0AVuR7ZyouUHLeNSiO6pqulF7dYa3s19c6t+wz9LD69/uSzdMxJ2S91nTI9U3rt/IldxpzMOFejp6f0hjg==
+
+fontsource-roboto@^2.1.4:
+  version "2.1.4"
+  resolved "https://registry.yarnpkg.com/fontsource-roboto/-/fontsource-roboto-2.1.4.tgz#1716342fea11380e5d4adf7e90cc0ccd7b6e6856"
+  integrity sha512-2NP2idRiX19pjwdNV0NvPaiDziIAFYg6IogPuQUJwVYq8BYqPDWRAGX7maQQFzvEvAUt1u9xaRGVwE7SIeCKDA==
 
 for-in@^0.1.3:
   version "0.1.8"
