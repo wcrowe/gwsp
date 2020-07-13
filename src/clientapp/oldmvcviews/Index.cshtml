@@ -1,0 +1,674 @@
+﻿@{
+    ViewData["Title"] = " - SuncoastPortal";
+}
+@using System.Linq
+@using Microsoft.AspNetCore.Mvc.Controllers
+@using SuncoastPortal.Models.Volunteer
+@model SuncoastPortal.Models.Volunteer.ApplicantViewModel
+
+<div class="container">
+<main role="main" class="pb-3">
+<div class="row">
+    <div class="col-xl-12 small">
+        <h4><b>Personal Information</b></h4>(* Denotes a required field.)
+    </div>
+</div>
+<form method="post" id="new-applicant"  name="Applicant">
+<div class="row">
+    <div class="col-xl-5">
+        <div class="form-group">
+            <label asp-for="Application.Email"></label>
+            <input asp-for="Application.Email" data-val="true" class="form-control" type="email" onblur="checkemail(this)" />
+            <span asp-validation-for="Application.Email" class="text-danger"></span>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-xl-5">
+        <div class="form-group">
+            <label asp-for="Application.DateofBirth"></label>
+            <input asp-for="Application.DateofBirth" type="date" class="form-control" />
+            <span asp-validation-for="Application.DateofBirth" class="text-danger"></span>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-xl-5">
+        <div class="form-group">
+            <label asp-for="Application.FirstName"></label>
+            <input asp-for="Application.FirstName" data-val="true" class="form-control" />
+            <span asp-validation-for="Application.FirstName" class="text-danger"></span>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-xl-5">
+        <div class="form-group">
+            <label asp-for="Application.MiddleName"></label>
+            <input asp-for="Application.MiddleName" data-val="true" class="form-control" />
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-xl-5">
+        <div class="form-group">
+            <label asp-for="Application.LastName"></label>
+            <input asp-for="Application.LastName" data-val="true" class="form-control" />
+            <span asp-validation-for="Application.LastName" class="text-danger"></span>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-xl-6">
+        <div class="form-group">
+            <label asp-for="Application.Address"></label>
+            <input asp-for="Application.Address" data-val="true" class="form-control" />
+            <span asp-validation-for="Application.Address" class="text-danger"></span>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-xl-6">
+        <div class="form-group">
+            <label asp-for="Application.AddressExt"></label>
+            <input asp-for="Application.AddressExt" data-val="true" class="form-control" />
+            <span asp-validation-for="Application.AddressExt" class="text-danger"></span>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-xl-5">
+        <div class="form-group">
+            <label asp-for="Application.City"></label>
+            <input asp-for="Application.City" data-val="true" class="form-control" />
+            <span asp-validation-for="Application.City" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="col-xl-3">
+        <div class="form-group">
+            <label asp-for="Application.State"></label>
+            <select asp-for="Application.State" asp-items="@Model.StateDropDown" data-val="true" class="form-control">
+                <option>Please select one</option>
+            </select>
+            <span asp-validation-for="Application.State" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="col-xl-3">
+        <div class="form-group">
+            <label asp-for="Application.ZipCode"></label>
+            <input asp-for="Application.ZipCode" data-val="true" class="form-control" />
+            <span asp-validation-for="Application.ZipCode" class="text-danger"></span>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-xl-5">
+        <div class="form-group">
+            <label asp-for="Application.County"></label>
+            <select asp-for="Application.County" asp-items="@Model.CountyDropDown" data-val="true" class="form-control">
+                <option>Please select one</option>
+            </select>
+            <span asp-validation-for="Application.County" class="text-danger"></span>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-xl-5">
+        <div class="form-group">
+            <label asp-for="Application.PhoneNumber"></label>
+            <input asp-for="Application.PhoneNumber" data-val="true" class="form-control" />
+            <span asp-validation-for="Application.PhoneNumber" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="col-xl-3">
+        <div class="form-group">
+            <label asp-for="Application.PhoneNumberExt"></label>
+            <input asp-for="Application.PhoneNumberExt" data-val="true" class="form-control" />
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-xl-5">
+        <div class="form-group">
+            <label asp-for="Application.AlternatePhone"></label>
+            <input asp-for="Application.AlternatePhone" data-val="true" class="form-control" />
+            <span asp-validation-for="Application.AlternatePhone" class="text-danger"></span>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-xl-5">
+        <div class="form-group">
+            <label asp-for="Application.EmergencyContactFirstName"></label>
+            <input asp-for="Application.EmergencyContactFirstName" data-val="true" class="form-control" />
+            <span asp-validation-for="Application.EmergencyContactFirstName" class="text-danger"></span>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-xl-5">
+        <div class="form-group">
+            <label asp-for="Application.EmergencyContactLastName"></label>
+            <input asp-for="Application.EmergencyContactLastName" data-val="true" class="form-control" />
+            <span asp-validation-for="Application.EmergencyContactLastName" class="text-danger"></span>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-xl-5">
+        <div class="form-group">
+            <label asp-for="Application.EmergencyContactPhoneNumber"></label>
+            <input asp-for="Application.EmergencyContactPhoneNumber" data-val="true" class="form-control" />
+            <span asp-validation-for="Application.EmergencyContactPhoneNumber" class="text-danger"></span>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-xl-5">
+        <div class="form-group">
+            <label asp-for="Application.EmergencyContactRelationship"></label>
+            <input asp-for="Application.EmergencyContactRelationship" data-val="true" class="form-control" />
+            <span asp-validation-for="Application.EmergencyContactRelationship" class="text-danger"></span>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-xl-12">
+        <hr />
+    </div>
+</div>
+<div class="row">
+    <div class="col-xl-12">
+        <h4><b>Skills and Interests</b></h4>
+    </div>
+</div>
+<div class="row">
+    <div class="col-xl-6">
+        <div class="form-group">
+            <label asp-for="Application.EducationalBackground"></label>
+            <textarea asp-for="Application.EducationalBackground" data-val="true" class="form-control" rows="5"></textarea>
+            <span asp-validation-for="Application.EducationalBackground" class="text-danger"></span>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-xl-6">
+        <div class="form-group">
+            <label asp-for="Application.EmploymentStatus"></label>
+            <textarea asp-for="Application.EmploymentStatus" data-val="true" class="form-control" rows="5"></textarea>
+            <span asp-validation-for="Application.EmploymentStatus" class="text-danger"></span>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-xl-6">
+        <div class="form-group">
+            <label asp-for="Application.Hobbies"></label>
+            <textarea asp-for="Application.Hobbies" data-val="true" class="form-control" rows="5"></textarea>
+            <span asp-validation-for="Application.Hobbies" class="text-danger"></span>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-xl-6">
+        <div class="form-group">
+            <label asp-for="Application.VolunteerExperience"></label>
+            <textarea asp-for="Application.VolunteerExperience" data-val="true" class="form-control" rows="5"></textarea>
+            <span asp-validation-for="Application.VolunteerExperience" class="text-danger"></span>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-xl-6">
+        <div class="form-group">
+            <label asp-for="Application.CommunityAffiliations"></label>
+            <textarea asp-for="Application.CommunityAffiliations" data-val="true" class="form-control" rows="5"></textarea>
+            <span asp-validation-for="Application.CommunityAffiliations" class="text-danger"></span>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-xl-6">
+        <div class="form-group">
+            <label asp-for="Application.ReferralID"></label>
+            <select asp-for="Application.ReferralID" asp-items="@Model.ReferralDropDown" data-val="true" class="form-control">
+                <option>Please select one</option>
+            </select>
+            <span asp-validation-for="Application.ReferralID" class="text-danger"></span>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-xl-5">
+        <div class="form-group">
+            <label asp-for="Application.ReferralDetails"></label>
+            <input asp-for="Application.ReferralDetails" data-val="true" class="form-control" />
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-xl-12">
+        <hr />
+    </div>
+</div>
+<div class="row">
+    <div class="col-xl-12">
+        <h4><b>Availability</b></h4>
+    </div>
+</div>
+<div class="row">
+    <div class="col-xl-12">
+        <label asp-for="Application.ScheduleReferenceID"></label>
+    </div>
+</div>
+<div class="row">
+    <div class="col-xl-12">
+        <div class="form-group">
+            @foreach (var schedule in Model.SchedulesCheckBoxList)
+            {
+                <div class="row">
+                    <div class="col-xl-5">
+                        <div class="form-check">
+                            <input type="radio" asp-for="Application.ScheduleReferenceID" id="@schedule.ReferenceName" value="@schedule.CommonReferenceID" class="form-check-input" />
+                            <label class="form-check-label">@schedule.ReferenceName</label>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-xl-6">
+        <div class="form-group">
+            <label asp-for="Application.ScheduleExtText"></label>
+            <textarea asp-for="Application.ScheduleExtText" data-val="true" class="form-control" rows="5"></textarea>
+            <span asp-validation-for="Application.ScheduleExtText" class="text-danger"></span>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-xl-12">
+        <hr />
+    </div>
+</div>
+<div class="row">
+    <div class="col-xl-12">
+        <h4><b>Preferences in Volunteering</b></h4>
+    </div>
+</div>
+<div class="row">
+    <div class="col-xl-12">
+        <label>*What volunteer opportunity is of interest to you? (Please refer to volunteer opportunities available within your area. Check all that apply in order of preference):</label>
+
+    </div>
+</div>
+<ul style="list-style-type: none; color:blue;" id="selectedSvc" claclass="clearfix">
+
+</ul>
+<div>
+    @for (int idx = 0; idx < Model.Application.Services.Count(); idx++)
+    {
+        <div class="row">
+            <div class="col-xl-5">
+                <div class="form-check">
+                    <input type="checkbox" asp-for="Application.Services[idx].isSelected" class="form-check-input" data-sevice-name="@Model.Application.Services[idx].ServiceName" data-serviceId="@Model.Application.Services[idx].ServiceID" data-priority="" data-listval="" onchange="CalculatePriority(this)" />
+                    <a href="javascript:;"  onclick="OpenServiceModal(@Model.Application.Services[idx].ServiceID)">
+                        @Model.Application.Services[idx].ServiceName
+                    </a>
+                    <input type="hidden" asp-for="Application.Services[idx].ServiceID" />
+                    <input type="hidden" asp-for="Application.Services[idx].ServiceName" />
+                    <input type="hidden" asp-for="Application.Services[idx].ProgramID" />
+                    <input type="hidden" asp-for="Application.Services[idx].PriorityPreferred" />
+
+                </div>
+            </div>
+        </div>
+
+    }
+</div>
+<div>
+    <span asp-validation-for="@Model.ServiceList" class="text-danger"></span>
+</div>
+
+<div class="row">
+    <div class="col-xl-12">
+        <hr />
+    </div>
+</div>
+<div class="row">
+    <div class="col-xl-6">
+        <div class="form-group">
+            <label asp-for="Application.hasGeographicPreference"></label>
+            <select asp-for="Application.hasGeographicPreference" class="form-control" id="geopreference" asp-items="@Model.HasGeographicPreferenceDropDown"></select>
+            <span asp-validation-for="Application.hasGeographicPreference" class="text-danger"></span>
+        </div>
+    </div>
+ 
+</div>
+<div id="geodropdown" class="d-none">
+    <div class="row">
+        <div class="col-xl-12">
+            <label asp-for="Application.CountyCbl"></label>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xl-12">
+            @for (int idx = 0; idx < Model.GeoPreferenceCheckBoxList.Count(); idx++)
+            {
+                <div class="row">
+                    <div class="col-xl-3">
+                        <div class="form-check">
+                            <input type="checkbox" class="form-check-input"/>
+                            <label>@Model.GeoPreferenceCheckBoxList[idx].ReferenceName</label>
+                        </div>
+                        <input type="hidden" value="Application.CountyCbl[idx].CommonReferenceID" />
+                        <input type="hidden" value="Application.CountyCbl[idx].ReferenceName" />
+                    </div>
+                </div>
+            }
+          
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-xl-12">
+        <hr />
+    </div>
+</div>
+<div class="row">
+    <div class="col-xl-12">
+        <h4><b>Background Verification</b></h4>
+    </div>
+</div>
+<div class="row">
+    <div class="col-xl-12">
+        <label asp-for="Application.hasCriminalOffense"></label>
+    </div>
+</div>
+<div class="row">
+    <div class="col-xl-3">
+        <div class="form-group">
+            <select asp-for="Application.hasCriminalOffense" class="form-control" asp-items="@Model.HasCriminalOffenseDropDown"></select>
+            <span asp-validation-for="Application.hasCriminalOffense" class="text-danger"></span>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-xl-12">
+        <label asp-for="Application.hasAbuseCharge"></label>
+    </div>
+</div>
+<div class="row">
+    <div class="col-xl-3">
+        <div class="form-group">
+            <select asp-for="Application.hasAbuseCharge" class="form-control" asp-items="@Model.HasAbuseChargeDropDown"></select>
+            <span asp-validation-for="Application.hasAbuseCharge" class="text-danger"></span>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-xl-12">
+        <label asp-for="Application.hasLicenseSuspended"></label>
+    </div>
+</div>
+<div class="row">
+    <div class="col-xl-3">
+        <div class="form-group">
+            <select asp-for="Application.hasLicenseSuspended" class="form-control" asp-items="@Model.HasLicenseSuspendedDropDown"></select>
+            <span asp-validation-for="Application.hasLicenseSuspended" class="text-danger"></span>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-xl-12">
+        <label asp-for="Application.hasAccomodations"></label>
+    </div>
+</div>
+<div class="row">
+    <div class="col-xl-3">
+        <div class="form-group">
+            <select asp-for="Application.hasAccomodations" class="form-control" asp-items="@Model.HasAccommodationsDropDown"></select>
+            <span asp-validation-for="Application.hasAccomodations" class="text-danger"></span>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-xl-12">
+        <label asp-for="Application.hasBackgroundCheck"></label>
+    </div>
+</div>
+<div class="row">
+    <div class="col-xl-3">
+        <div class="form-group">
+            <select asp-for="Application.hasBackgroundCheck" class="form-control" asp-items="@Model.HasBackgroundCheckDropDown"></select>
+            <span asp-validation-for="Application.hasBackgroundCheck" class="text-danger"></span>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-xl-12">
+        <label asp-for="Application.hasSimilarlyEmployed"></label>
+    </div>
+</div>
+<div class="row">
+    <div class="col-xl-3">
+        <div class="form-group">
+            <select asp-for="Application.hasSimilarlyEmployed" class="form-control" asp-items="@Model.HasAbuseChargeDropDown"></select>
+            <span asp-validation-for="Application.hasSimilarlyEmployed" class="text-danger"></span>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-xl-12">
+        <hr />
+    </div>
+</div>
+<div class="row">
+    <div class="col-xl-12">
+        <h4><b>Voluntary Self-Identification</b></h4>
+    </div>
+</div>
+<div class="row">
+    <div class="col-xl-12">
+        <u>Voluntary Self-Identification Form</u>
+    </div>
+</div>
+<div class="row">
+    <div class="col-xl-12">
+        <p>
+            (For Affirmative Action Plan Purposes you are requested to voluntarily provide the information
+            requested below. Failure to respond will in no way affect the application process)
+        </p>
+    </div>
+</div>
+<div class="row">
+    <div class="col-xl-12">
+        <p>
+            Goodwill Industries-Suncoast, Inc. is an equal opportunity employer and is subject to certain reporting and affirmative action requirements.
+            Qualified applicants are considered without regard to race, color, ancestry, ethnicity, religion, age, sex, national origin, disability, veteran status, sexual orientation, or any other classification protected by federal, state, or local law.
+        </p>
+    </div>
+</div>
+<div class="row">
+    <div class="col-xl-12">
+        <p>
+            The information requested below is used by Goodwill Industries-Suncoast, Inc. to maintain records required of employers doing business with the federal government.
+            In an effort to comply with such requirement, we invite you to complete this form.
+            Providing this information is strictly voluntary and will not be used as a basis for employment decisions.
+            A refusal to complete this form will not subject you to any adverse treatment. The information provided will be held in the strictest confidence, and will be maintained separately from the application.
+        </p>
+    </div>
+</div>
+<div class="row">
+    <div class="col-xl-3">
+        <div class="form-group">
+            <label asp-for="Application.GenderID"></label>
+            <select asp-for="Application.GenderID" asp-items="@Model.GenderDropDown" class="form-control">
+                <option>Please select one</option>
+            </select>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-xl-3">
+        <div class="form-group">
+            <label asp-for="Application.EthnicityID"></label>
+            <select asp-for="Application.EthnicityID" asp-items="@Model.EthnicityDropDown" class="form-control">
+                <option>Please select one</option>
+            </select>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-xl-6">
+        <div class="form-group">
+            <input type="checkbox" asp-for="Application.IsHispanic" class="form-check" />
+            <label asp-for="Application.IsHispanic"></label>
+
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-xl-12">
+        <hr />
+    </div>
+</div>
+@*Uploaded files display*@
+@*<div class="row">
+    <div class="col-xl-12">
+        <i class="fas fa-file-pdf fa-3x"></i>
+        <i class="fas fa-file-pdf fa-3x"></i>
+    </div>
+</div>*@
+<div class="row">
+    <div class="col-xl-6">
+        <div class="form-group">
+            <div class="custom-file">
+                <input type="file" class="custom-file-input" id="customFile"  onchange="uploadFiles(this);return false;" >
+                <label class="custom-file-label" for="customFile">Choose a file to upload</label>
+            </div>
+        </div>
+    </div>
+</div>
+@*<div class="row">
+    <div class="col-xl-8">
+        <ul id="files" class="list-group">
+            <li class="list-group-item"></li>
+        </ul>
+    </div>
+</div>*@
+<div class="row">
+    <div class="col-xl-12">
+        <hr />
+    </div>
+</div>
+<div class="row">
+    <div class="col-xl-12">
+        <p>
+            PLEASE READ ALL OF THE ABOVE CAREFULLY BEFORE SIGNING.
+            BY TYPING YOUR NAME AND SUBMITTING YOUR APPLICATION, THE AUTHORIZATIONS, CONSENTS, AND ACKNOWLEDGEMENTS SPECIFIED IN THE ABOVE FORM ARE FULLY BINDING AND ENFORCEABLE.
+        </p>
+    </div>
+</div>
+<div class="row">
+    <div class="col-xl-6">
+        <div class="form-group">
+            <lable asp-for="Application.AgreementSignature"></lable>
+            <input asp-for="Application.AgreementSignature" data-val="true" class="form-control" type="text" onblur="checkemail(this)" />
+            <span asp-validation-for="Application.AgreementSignature" class="text-danger"></span>
+        </div>
+    </div>
+</div>
+
+
+<div class="row">
+    <div class="col-4">
+        <input type="hidden" asp-for="Application.InAgreement"/>
+        <a href="#" data-toggle="modal" data-target="#AgreementModal" data-backdrop="static" data-keyboard="false" class="form-control btn btn-primary btn-block" id="agreesubmit" onclick="Agree()">Submit</a>
+
+    </div>
+    <div class="col-4">
+        <button type="reset" class="form-control btn-secondary" onclick="$(this).resetValidation()">Reset</button>
+  </div>
+</div>
+</form>
+
+
+<!-- The Modal -->
+<div class="modal  fade" id="service-modal">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title" id="service-name"></h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <!-- Modal body -->
+            <div class="modal-body" id="service-description">
+            </div>
+            <!-- Modal footer -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal  fade" id="agreement-modal">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4>Applicant Agreement</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <!-- Modal body -->
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-xl-12">
+                        <p>You agree to the terms</p>
+                    </div>
+                </div>
+                <div class="row">
+                </div>
+            </div>
+            <!-- Modal footer -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" onclick="FinalSubmit()">Agree</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Disagree</button>
+
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="exists-modal">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4>Volunteer Exists</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <!-- Modal body -->
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-xl-12">
+                        <p>“Thank you for inquiring about volunteering with Goodwill-Suncoast!  It appears that we have a previous volunteer application on file for you with one of our departments (Volunteer Services, BookWorks, JA Finance Park or Belle of the Ball).  Please give us a call at 727-523-1512 to verify your application and help you get started with volunteering.  We look forward to hearing from you!”</p>
+                    </div>
+                </div>
+                <div class="row">
+                </div>
+            </div>
+            <!-- Modal footer -->
+            <div class="modal-footer">
+          
+                <button type="button" class="btn btn-danger" data-dismiss="modal">OK</button>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+</main>
+</div>

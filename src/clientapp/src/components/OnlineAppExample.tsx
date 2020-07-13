@@ -41,9 +41,10 @@ type InputProps = React.DetailedHTMLProps<
   HTMLInputElement
 >;
 
-// use as 
+// use as  <Form.Control type="text" ref={register({ required: true }) as RBRef}></Form.Control>
 type RBRef = string & ((ref: Element | null) => void);
 
+//  <Input ref={register} name="LastName" />
 const Input = React.forwardRef<HTMLInputElement, InputProps>((props, ref) => (
     <input ref={ref} {...props} />
   ));
@@ -62,7 +63,6 @@ const OnlineAppExample = () => {
       <Form onSubmit={handleSubmit(onSubmit)}>
         <Form.Row>
           <Form.Group as={Col} controlId="formGridEmail">
-          <Input ref={register} name="LastName" />
             <Form.Label>Email</Form.Label>
             <Form.Control
               type="text"
