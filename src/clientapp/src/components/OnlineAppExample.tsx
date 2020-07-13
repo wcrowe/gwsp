@@ -1,6 +1,6 @@
 import React from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
-// import { DevTool } from "@hookform/devtools";
+ import { DevTool } from "@hookform/devtools";
 import { Form, Col, Button, Spinner, Container } from "react-bootstrap";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers";
@@ -13,7 +13,8 @@ type FormData = {
   LastName: string;
   Address: string;
   AddressExt?: string;
-  //   City: string;
+  City: string;
+  StateId: string
   //   ZipCode: string;
   //   PhoneNumber: string;
   //   PhoneNumberExt: string;
@@ -24,7 +25,8 @@ const schema = yup.object().shape({
   FirstName: yup.string().required("First name is required"),
   LastName: yup.string().required("Last name is required"),
   Address: yup.string().required("Address is required"),
-  //   City: yup.string().required("City is required"),
+  City: yup.string().required("City is required"),
+  //StateId: yup.string().required("State is required"),
   //   ZipCode: yup.string().required("Zip is required"),
   //   PhoneNumber: yup.string().required("Phone is required"),
   Email: yup
@@ -150,6 +152,40 @@ const OnlineAppExample = () => {
           </Form.Group>
         </Form.Row>
         <Form.Row>
+          <Form.Group as={Col} controlId="formGridCity">
+            <Form.Label>City</Form.Label>
+            <Form.Control
+              type="text"
+              placeholder="City"
+              name="City"
+              isInvalid={!!errors.City}
+              ref={register}
+              maxLength={200}
+            ></Form.Control>
+            <Form.Control.Feedback type="invalid">
+              {errors.City?.message}
+            </Form.Control.Feedback>
+          </Form.Group>
+        </Form.Row>
+        <Form.Row>
+          <Form.Group controlId="formGridState">
+            <Form.Label>State</Form.Label>
+            <Form.Control as="select" 
+              name="SateId"   
+              ref={register}
+              >
+              <option>Please select one</option>
+              <option value="1">Alabama</option>
+              <option value="2">Arkansa</option>
+              <option value="3">Florida</option>
+            </Form.Control>
+            <Form.Control.Feedback type="invalid">
+              {errors.StateId?.message}
+            </Form.Control.Feedback>
+          </Form.Group>
+        </Form.Row>
+
+        <Form.Row>
           <Form.Group as={Col} controlId="formGridSubmit">
             <Button type="submit" variant="primary" size="lg" active block>
               Sign in
@@ -157,6 +193,7 @@ const OnlineAppExample = () => {
           </Form.Group>
         </Form.Row>
       </Form>
+      <DevTool control={control} /> {/* set up the dev tool */}
     </Container>
   );
 };
