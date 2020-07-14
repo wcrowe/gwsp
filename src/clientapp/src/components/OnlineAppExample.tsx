@@ -1,3 +1,9 @@
+// This form is meant to use as example of how to use react-bootstrap with react-hook-form
+// Some sources 
+//   1:  https://dev.to/carlrippon/dropdown-data-binding-with-react-hooks-3cfi    (Fill Dropdowns)
+//   2: https://www.carlrippon.com/drop-down-data-binding-with-react-hooks/ (Original Fill Dropdowns)
+//   3: https://www.carlrippon.com/react-context-with-typescript-p1/ (React Context)
+
 import React from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { DevTool } from "@hookform/devtools";
