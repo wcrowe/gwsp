@@ -195,6 +195,7 @@ const OnlineAppExample = (props: any) => {
         </Form.Row>
         <Form.Row>
           <Form.Group controlId="formselectState">
+          <Form.Label>State</Form.Label>
             <Form.Control as="select" name="StateId" ref={register}   isInvalid={!!errors.StateId}>
             <option value="">Select...</option>
             <option value="12">California</option>
