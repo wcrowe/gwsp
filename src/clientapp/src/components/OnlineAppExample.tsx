@@ -15,7 +15,7 @@ type FormData = {
   AddressExt?: string | null;
   City: string;
   StateId: string;
-  //   ZipCode: string;
+  ZipCode: string;
   //   PhoneNumber: string;
   //   PhoneNumberExt: string;
   //   AlternatePhone: string;
@@ -27,7 +27,7 @@ const schema = yup.object().shape({
   Address: yup.string().required("Address is required"),
   City: yup.string().required("City is required"),
   StateId: yup.string().required("State is required"),
-  //   ZipCode: yup.string().required("Zip is required"),
+  ZipCode: yup.string().required("Zip is required"),
   //   PhoneNumber: yup.string().required("Phone is required"),
   Email: yup
     .string()
@@ -52,9 +52,9 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>((props, ref) => (
 ));
 
 const States = [
-  { label: "Alabama", value: "1" },
-  { label: "Arkansa", value: "2" },
-  { label: "Florida", value: "3" },
+  { StateName: "Alabama", StateCode: "1" },
+  { StateName: "Arkansa", StateCode: "2" },
+  { StateName: "Florida", StateCode: "3" },
 ];
 
 const MARKETING_ROLE_OPTIONS = [
@@ -80,6 +80,7 @@ const OnlineAppExample = (props: any) => {
   const { register, control, handleSubmit, errors } = useForm<FormData>({
     resolver: yupResolver(schema),
   });
+  const [stateLU] = React.useState(States);
 
   const onSubmit: SubmitHandler<FormData> = (data) => {
     console.log(JSON.stringify(data));
@@ -193,7 +194,7 @@ const OnlineAppExample = (props: any) => {
           </Form.Group>
         </Form.Row>
         <Form.Row>
-          <Form.Group controlId="formselectState">
+          <Form.Group controlId="formGridState">
             <Form.Label>State</Form.Label>
             <Form.Control
               as="select"
@@ -201,12 +202,31 @@ const OnlineAppExample = (props: any) => {
               ref={register}
               isInvalid={!!errors.StateId}
             >
-              <option value="">Select...</option>
-              <option value="12">California</option>
-              <option value="13">Flordia</option>
+              <option value="">Select A State</option>
+              {stateLU.map((State) => (
+                <option key={State.StateCode} value={State.StateCode}>
+                  {State.StateName}
+                </option>
+              ))}
             </Form.Control>
             <Form.Control.Feedback type="invalid">
               {errors.StateId?.message}
+            </Form.Control.Feedback>
+          </Form.Group>
+        </Form.Row>
+        <Form.Row>
+          <Form.Group as={Col} controlId="formGridLastName">
+            <Form.Label>Zip</Form.Label>
+            <Form.Control
+              type="text"
+              placeholder="Zip Code"
+              name="ZipCode"
+              isInvalid={!!errors.ZipCode}
+              ref={register}
+              maxLength={15}
+            ></Form.Control>
+            <Form.Control.Feedback type="invalid">
+              {errors.ZipCode?.message}
             </Form.Control.Feedback>
           </Form.Group>
         </Form.Row>
