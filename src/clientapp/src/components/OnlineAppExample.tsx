@@ -59,23 +59,22 @@ const States = [
 
 const MARKETING_ROLE_OPTIONS = [
   {
-    label: 'test',
-    value: '1',
+    label: "test",
+    value: "1",
   },
   {
-    label: 'test 2',
-    value: '2',
+    label: "test 2",
+    value: "2",
   },
   {
-    label: 'test 3',
-    value: '3',
+    label: "test 3",
+    value: "3",
   },
   {
-    label: 'test 4',
-    value: '4',
+    label: "test 4",
+    value: "4",
   },
 ];
-
 
 const OnlineAppExample = (props: any) => {
   const { register, control, handleSubmit, errors } = useForm<FormData>({
@@ -195,11 +194,16 @@ const OnlineAppExample = (props: any) => {
         </Form.Row>
         <Form.Row>
           <Form.Group controlId="formselectState">
-          <Form.Label>State</Form.Label>
-            <Form.Control as="select" name="StateId" ref={register}   isInvalid={!!errors.StateId}>
-            <option value="">Select...</option>
-            <option value="12">California</option>
-            <option value="13">Flordia</option>
+            <Form.Label>State</Form.Label>
+            <Form.Control
+              as="select"
+              name="StateId"
+              ref={register}
+              isInvalid={!!errors.StateId}
+            >
+              <option value="">Select...</option>
+              <option value="12">California</option>
+              <option value="13">Flordia</option>
             </Form.Control>
             <Form.Control.Feedback type="invalid">
               {errors.StateId?.message}
