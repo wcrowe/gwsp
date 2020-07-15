@@ -1,5 +1,5 @@
 // This form is meant to use as example of how to use react-bootstrap with react-hook-form
-// Some sources 
+// Some sources
 //   1:  https://dev.to/carlrippon/dropdown-data-binding-with-react-hooks-3cfi    (Fill Dropdowns)
 //   2: https://www.carlrippon.com/drop-down-data-binding-with-react-hooks/ (Original Fill Dropdowns)
 //   3: https://www.carlrippon.com/react-context-with-typescript-p1/ (React Context)
@@ -7,7 +7,11 @@
 import React from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { DevTool } from "@hookform/devtools";
-import { Form, Col, Button, Spinner, Container } from "react-bootstrap";
+import { Spinner } from "react-bootstrap";
+import Form from "react-bootstrap/Form";
+import Col from "react-bootstrap/Col";
+import Button from "react-bootstrap/Button";
+import Container from "react-bootstrap/Container";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers";
 
@@ -22,9 +26,9 @@ type FormData = {
   City: string;
   StateId: string;
   ZipCode: string;
-  //   PhoneNumber: string;
-  //   PhoneNumberExt: string;
-  //   AlternatePhone: string;
+  PhoneNumber: string;
+  PhoneNumberExt: string;
+  AlternatePhone: string;
 };
 
 const schema = yup.object().shape({
@@ -34,7 +38,7 @@ const schema = yup.object().shape({
   City: yup.string().required("City is required"),
   StateId: yup.string().required("State is required"),
   ZipCode: yup.string().required("Zip is required"),
-  //   PhoneNumber: yup.string().required("Phone is required"),
+  PhoneNumber: yup.string().required("Phone is required"),
   Email: yup
     .string()
     .required("Email address is required")
@@ -221,7 +225,7 @@ const OnlineAppExample = (props: any) => {
           </Form.Group>
         </Form.Row>
         <Form.Row>
-          <Form.Group as={Col} controlId="formGridLastName">
+          <Form.Group as={Col} sm={6} md={3} controlId="formGridZipCode">
             <Form.Label>Zip</Form.Label>
             <Form.Control
               type="text"
@@ -229,11 +233,51 @@ const OnlineAppExample = (props: any) => {
               name="ZipCode"
               isInvalid={!!errors.ZipCode}
               ref={register}
-              maxLength={15}
+              maxLength={20}
             ></Form.Control>
             <Form.Control.Feedback type="invalid">
               {errors.ZipCode?.message}
             </Form.Control.Feedback>
+          </Form.Group>
+        </Form.Row>
+        <Form.Row>
+          <Form.Group as={Col} controlId="formGridPhoneNumber">
+            <Form.Label>Phone</Form.Label>
+            <Form.Control
+              type="text"
+              placeholder="Phone"
+              name="PhoneNumber"
+              isInvalid={!!errors.PhoneNumber}
+              ref={register}
+              maxLength={20}
+            ></Form.Control>
+            <Form.Control.Feedback type="invalid">
+              {errors.PhoneNumber?.message}
+            </Form.Control.Feedback>
+          </Form.Group>
+        </Form.Row>
+        <Form.Row>
+          <Form.Group as={Col} controlId="formGridPhoneNumberExt">
+            <Form.Label>Phone Ext</Form.Label>
+            <Form.Control
+              type="text"
+              placeholder="Phone Ext"
+              name="PhoneNumberExt"
+              ref={register}
+              maxLength={20}
+            ></Form.Control>
+          </Form.Group>
+        </Form.Row>
+        <Form.Row>
+          <Form.Group as={Col} controlId="formGridAlternatePhone">
+            <Form.Label>Alternate Phone</Form.Label>
+            <Form.Control
+              type="text"
+              placeholder="Alternate Phone"
+              name="AlternatePhone"
+              ref={register}
+              maxLength={20}
+            ></Form.Control>
           </Form.Group>
         </Form.Row>
         <Form.Row>
