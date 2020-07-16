@@ -1,0 +1,50 @@
+﻿<#@ template debug="false" hostspecific="false" language="C#" #>
+<#@ include file="SqlHelper.ttinclude" #>
+<#@ assembly name="System.Core" #>
+<#@ assembly name="System.Data" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="System.Data.SqlClient" #>
+
+<#+
+public static IEnumerable<DatabaseTable> GetTables()
+{
+        string connectionString = "Data Source=localhost;Initial Catalog=Volunteers;Integrated Security=True";
+
+    var tables = new List<DatabaseTable>();
+    using (SqlConnection sqlConnection = new SqlConnection(connectionString))
+    {
+            var sql= "select distinct table_Name [TableName], column_name [ColumnName], ORDINAL_POSITION [ColumnPostion], is_nullable [Nullable], data_type [DataType], character_maximum_length [ColumnLength] FROM INFORMATION_SCHEMA.COLUMNS ORDER BY TABLE_NAME,ORDINAL_POSITION";
+
+        SqlCommand command = new SqlCommand(sql, sqlConnection);
+        sqlConnection.Open();
+
+        var reader = command.ExecuteReader();
+        while (reader.Read())
+        {
+            DatabaseTable table = new DatabaseTable();
+            table.TableName = reader.GetString(0);
+            table.ColumnName= reader.GetString(1);
+            table.ColumnPosition = reader.GetInt32(2);
+            table.Nullable = reader.GetString(3);
+            table.DataType = reader.GetString(4);
+            table.ColumnLength =   reader.IsDBNull(5) ? -99 : reader.GetInt32(5);
+            tables.Add(table);
+        }
+    }
+
+        return tables;
+}
+
+     public class DatabaseTable
+        {
+            public string ColumnName { get; set; }
+            public int ColumnPosition { get; set; }
+            public string TableName { get; set; }
+            public string Nullable { get; set; }
+            public string DataType { get; set; }
+            public int ColumnLength {get;set;}
+        }
+
+#>

@@ -1,0 +1,34 @@
+﻿<#@ template debug="false" hostspecific="false" language="C#" #>
+<#@ include file="SqlHelper.ttinclude" #>
+<#@ assembly name="System.Core" #>
+<#@ assembly name="System.Data" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="System.Data.SqlClient" #>
+<#@ output extension=".txt" #>
+<#const string tbl= "Application";#>
+<# foreach (var table in GetTables().Where( x => x.TableName == tbl)) { #>
+<#var item = table.ColumnName;#>
+<#var nullable = table.Nullable == "YES" ? "true": "false";#>
+<#var length = table.ColumnLength;#>
+<#        if (length > 0){#>
+       <Form.Row>
+          <Form.Group as={Col} controlId="formGrid<#=                item#>">
+            <Form.Label>Email</Form.Label>
+            <Form.Control
+              type="text"
+              placeholder="<#=                item#>"
+              name=""<#=                item#>"
+              ref={register}
+              maxLength={<#=                length#>}
+              isInvalid={!!errors.<#=                item#>}
+            ></Form.Control>
+            <Form.Control.Feedback type="invalid">
+              {errors.<#=                item#>?.message}
+            </Form.Control.Feedback>
+          </Form.Group>
+        </Form.Row>
+<#}#>
+<#}#>
+

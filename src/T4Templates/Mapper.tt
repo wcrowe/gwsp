@@ -1,0 +1,38 @@
+﻿<#@ template debug="false" hostspecific="false" language="C#" #>
+<#@ include file="SqlHelper.ttinclude" #>
+<#@ assembly name="System.Core" #>
+<#@ assembly name="System.Data" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="System.Data.SqlClient" #>
+<#@ output extension=".txt" #>
+
+<#const string tbl= "Application";#>
+
+<# foreach (var table in GetTables().Where( x => x.TableName == tbl)) { #>
+<#var item = table.ColumnName;#>
+<#var nullable = table.Nullable == "YES" ? "true": "false";#>
+<#var length = table.ColumnLength;#>
+<#        if (length > 0){#>
+<#=table.Nullable #>
+<Grid item xs={12}>
+<TextField
+    label="<#=                item#>"
+ type="text"
+ id="<#=                item#>"
+ name="<#=                item#>"
+ size="small"
+ variant="outlined"
+ className={classes.textField}
+ inputProps={{maxLength: <#=                length#> , }}
+ helperText={errors.<#=                item#>?.message}
+ error={!!errors.<#=                item#>}
+ inputRef={register({ required: <#=                nullable#> })}
+/>
+</Grid>
+<#}#>
+<#}#>
+
+
+
