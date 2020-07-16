@@ -1,0 +1,46 @@
+﻿
+
+type FormData = {
+  ApplicationID?: string;
+  ApplicantID?: string;
+  PhoneNumber?: string;
+  PhoneNumberExt?: string;
+  AlternatePhone?: string;
+  Email?: string;
+  ApplicationDate?: string;
+  Address?: string;
+  AddressExt?: string;
+  City?: string;
+  State?: string;
+  ZipCode?: string;
+  County?: string;
+  DriverLicense?: string;
+  EmergencyContactFirstName?: string;
+  EmergencyContactLastName?: string;
+  EmergencyContactPhoneNumber?: string;
+  EmergencyContactRelationship?: string;
+  EducationalBackground?: string;
+  EmploymentStatus?: string;
+  Hobbies?: string;
+  VolunteerExperience?: string;
+  CommunityAffiliations?: string;
+  ReferralID?: string;
+  ReferralDetails?: string;
+  ScheduleReferenceID?: string;
+  ScheduleExtText?: string;
+  hasGeographicPreference?: string;
+  hasCriminalOffense?: string;
+  hasAbuseCharge?: string;
+  hasLicenseSuspended?: string;
+  hasAccomodations?: string;
+  hasBackgroundCheck?: string;
+  hasSimilarlyEmployed?: string;
+  AgreementSignature?: string;
+  CreatedBy?: string;
+  CreatedDate?: string;
+  ModifiedBy?: string;
+  ModifiedDate?: string;
+  IsCurrent?: string;
+  InAgreement?: string;
+}
+

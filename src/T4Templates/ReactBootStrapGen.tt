@@ -15,11 +15,11 @@
 <#        if (length > 0){#>
        <Form.Row>
           <Form.Group as={Col} controlId="formGrid<#=                item#>">
-            <Form.Label>Email</Form.Label>
+            <Form.Label><#=                item#></Form.Label>
             <Form.Control
               type="text"
               placeholder="<#=                item#>"
-              name=""<#=                item#>"
+              name="<#=                item#>"
               ref={register}
               maxLength={<#=                length#>}
               isInvalid={!!errors.<#=                item#>}

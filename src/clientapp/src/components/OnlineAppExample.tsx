@@ -29,6 +29,10 @@ type FormData = {
   PhoneNumber: string;
   PhoneNumberExt: string;
   AlternatePhone: string;
+  EmergencyContactFirstName: string;
+  EmergencyContactLastName: string;
+  EmergencyContactPhoneNumber: string;
+  EmergencyContactRelationship: string;
 };
 
 const schema = yup.object().shape({
@@ -46,6 +50,12 @@ const schema = yup.object().shape({
   // DOB: yup.string().test("DOB", "Must be at least 16.", (value) => {
   //   return moment().diff(moment(value), "years") >= 16;
   // }),
+  EmergencyContactFirstName: yup.string().requiered("Please enter First Name"),
+  EmergencyContactLastName: yup.string().requiered("Please enter Last Name"),
+  EmergencyContactPhoneNumber: yup
+    .string()
+    .requiered("Please enter a contact number"),
+  EmergencyContactRelationship: yup.string().requiered("Relationship"),
 });
 
 type InputProps = React.DetailedHTMLProps<
@@ -278,6 +288,70 @@ const OnlineAppExample = (props: any) => {
               ref={register}
               maxLength={20}
             ></Form.Control>
+          </Form.Group>
+        </Form.Row>
+        <Form.Row>
+          <Form.Group as={Col} controlId="formGridEmergencyContactFirstName">
+            <Form.Label>Emergency Contact First Name</Form.Label>
+            <Form.Control
+              type="text"
+              placeholder="First Name"
+              name="EmergencyContactFirstName"
+              ref={register}
+              maxLength={200}
+              isInvalid={!!errors.EmergencyContactFirstName}
+            ></Form.Control>
+            <Form.Control.Feedback type="invalid">
+              {errors.EmergencyContactFirstName?.message}
+            </Form.Control.Feedback>
+          </Form.Group>
+        </Form.Row>
+        <Form.Row>
+          <Form.Group as={Col} controlId="formGridEmergencyContactLastName">
+            <Form.Label>Emergency Contact Last Name</Form.Label>
+            <Form.Control
+              type="text"
+              placeholder="Last Name"
+              name="Emergency Contact Last Name"
+              ref={register}
+              maxLength={200}
+              isInvalid={!!errors.EmergencyContactLastName}
+            ></Form.Control>
+            <Form.Control.Feedback type="invalid">
+              {errors.EmergencyContactLastName?.message}
+            </Form.Control.Feedback>
+          </Form.Group>
+        </Form.Row>
+        <Form.Row>
+          <Form.Group as={Col} controlId="formGridEmergencyContactPhoneNumber">
+            <Form.Label>Emergency Contact Phoner</Form.Label>
+            <Form.Control
+              type="text"
+              placeholder="Phone Number"
+              name="EmergencyContactPhoneNumber"
+              ref={register}
+              maxLength={50}
+              isInvalid={!!errors.EmergencyContactPhoneNumber}
+            ></Form.Control>
+            <Form.Control.Feedback type="invalid">
+              {errors.EmergencyContactPhoneNumber?.message}
+            </Form.Control.Feedback>
+          </Form.Group>
+        </Form.Row>
+        <Form.Row>
+          <Form.Group as={Col} controlId="formGridEmergencyContactRelationship">
+            <Form.Label>Emergency Contact Relationship</Form.Label>
+            <Form.Control
+              type="text"
+              placeholder="Relationship"
+              name="EmergencyContactRelationship"
+              ref={register}
+              maxLength={50}
+              isInvalid={!!errors.EmergencyContactRelationship}
+            ></Form.Control>
+            <Form.Control.Feedback type="invalid">
+              {errors.EmergencyContactRelationship?.message}
+            </Form.Control.Feedback>
           </Form.Group>
         </Form.Row>
         <Form.Row>
