@@ -50,12 +50,12 @@ const schema = yup.object().shape({
   // DOB: yup.string().test("DOB", "Must be at least 16.", (value) => {
   //   return moment().diff(moment(value), "years") >= 16;
   // }),
-  EmergencyContactFirstName: yup.string().requiered("Please enter First Name"),
-  EmergencyContactLastName: yup.string().requiered("Please enter Last Name"),
+  EmergencyContactFirstName: yup.string().required("Please enter First Name"),
+  EmergencyContactLastName: yup.string().required("Please enter Last Name"),
   EmergencyContactPhoneNumber: yup
     .string()
-    .requiered("Please enter a contact number"),
-  EmergencyContactRelationship: yup.string().requiered("Relationship"),
+    .required("Please enter a contact number"),
+  EmergencyContactRelationship: yup.string().required("Relationship"),
 });
 
 type InputProps = React.DetailedHTMLProps<
