@@ -312,7 +312,7 @@ const OnlineAppExample = (props: any) => {
             <Form.Control
               type="text"
               placeholder="Last Name"
-              name="Emergency Contact Last Name"
+              name="EmergencyContactLastName"
               ref={register}
               maxLength={200}
               isInvalid={!!errors.EmergencyContactLastName}
@@ -324,7 +324,7 @@ const OnlineAppExample = (props: any) => {
         </Form.Row>
         <Form.Row>
           <Form.Group as={Col} controlId="formGridEmergencyContactPhoneNumber">
-            <Form.Label>Emergency Contact Phoner</Form.Label>
+            <Form.Label>Emergency Contact Phone</Form.Label>
             <Form.Control
               type="text"
               placeholder="Phone Number"
